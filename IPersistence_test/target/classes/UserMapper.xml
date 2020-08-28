@@ -1,0 +1,10 @@
+<mapper namespace="com.adt.dao.IUserDao">
+    <!--sql的唯一标识namespace.id来组成statementId-->
+    <select id="findAll" resultType="com.adt.pojo.User">
+        select * from user
+    </select>
+    <select id="findByCondition" resultType="com.adt.pojo.User" parameterType="com.adt.pojo.User">
+        select * from user where id=#{id} and username=#{username}
+    </select>
+
+</mapper>
