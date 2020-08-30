@@ -7,4 +7,14 @@
     <select id="findAll" resultType="com.adt.pojo.User">
         select * from User
     </select>
+    <insert id="saveUser" parameterType="com.adt.pojo.User">
+        insert into user values (#{id},#{username},#{password},#{birthday})
+    </insert>
+    <update id="updateUser" parameterType="com.adt.pojo.User">
+        update  user set username=#{username},password=#{password},birthday=#{birthday} where  id=#{id}
+    </update>
+    <!--只有一个参数名称可以是任意名称-->
+    <delete id="deleteUser" parameterType="java.lang.Integer">
+        delete from user where id=#{adv}
+    </delete>
 </mapper>
