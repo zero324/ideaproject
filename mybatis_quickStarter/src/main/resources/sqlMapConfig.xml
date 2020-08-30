@@ -3,6 +3,16 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <!--核心配置文件不一定起名 sqlMapConfig 也可以是其他  一般都起名sqlMapConfig-->
+
+    <!--加载properties配置文件-->
+    <properties resource="jdbc.properties"></properties>
+    <!--给实体类的全限定类名 起一个别名-->
+    <typeAliases>
+        <!--给单独的实体起别名-->
+       <!-- <typeAlias type="com.adt.pojo.User" alias="user"></typeAlias>-->
+        <!--批量起别名:该包下所有类的本身类名 :不区分大小写-->
+        <package name="com.adt.pojo"/>
+    </typeAliases>
     <!--environments 运行环境 可以配置多个运行环境-->
     <environments default="development">
         <environment id="development">
@@ -10,10 +20,10 @@
             <transactionManager type="JDBC"></transactionManager>
             <!--当前使用mybatis的连接池--><!--UNPOOLED 不使用mybatis连接池-->
             <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.jdbc.Driver"></property>
-                <property name="url" value="jdbc:mysql:///zdy_mybatis"></property>
-                <property name="username" value="root"></property>
-                <property name="password" value="123456"></property>
+                <property name="driver" value="${jdbc.driver}"></property>
+                <property name="url" value="${jdbc.url}"></property>
+                <property name="username" value="${jdbc.username}"></property>
+                <property name="password" value="${jdbc.password}"></property>
             </dataSource>
         </environment>
     </environments>
@@ -21,4 +31,5 @@
     <mappers>
         <mapper resource="UserMapper.xml"></mapper>
     </mappers>
+
 </configuration>
