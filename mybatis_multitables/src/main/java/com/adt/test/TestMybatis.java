@@ -7,7 +7,6 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -86,6 +85,15 @@ public class TestMybatis {
         List<Order> orderAndUser = mapper.findOrderAndUser();
         for (Order order : orderAndUser) {
             System.out.println(order);
+        }
+    }
+
+    @Test
+    public void oneToMany() throws IOException {
+
+        List<User> userAndOrder = mapper.findUserAndOrder();
+        for (User user : userAndOrder) {
+            System.out.println(user);
         }
     }
 }

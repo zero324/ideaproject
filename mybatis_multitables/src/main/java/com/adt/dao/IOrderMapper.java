@@ -17,7 +17,14 @@ public interface IOrderMapper {
     @Select("select * from orders")
     List<Order> findOrderAndUser();
 
-
+    @Results({
+            @Result(property = "id",column = "id" ),
+            @Result(property = "username",column = "username"),
+            @Result(property = "password",column = "password"),
+            @Result(property = "birthday",column = "birthday"),
+            @Result(property = "orderList", javaType =List.class ,column = "id", many = @Many(select ="com.adt.dao.IOrderMapper.selectOrders" )),
+    })//javaType 写不写都行
+    @Select("select * from user")
     List<User> findUserAndOrder();
 
     //增加用户
@@ -39,4 +46,6 @@ public interface IOrderMapper {
     @Select("select * from user where id=#{id}")
     User selectUserById(Integer id);
 
+    @Select("select * from orders where uid=#{id}")
+    List<Order> selectOrders(Integer id);
 }

@@ -31,7 +31,7 @@
     <mappers>
         <!--引入单独的xml配置文件-->
       <!--  <mapper resource="IOrderMapper.xml"></mapper>-->
-        <mapper class="com.adt.dao.IOrderMapper"></mapper><!--也会找同包同名 和package一样-->
+        <mapper class="com.adt.dao.IOrderMapper"></mapper><!--也会找同包同名 和package一样 优先找同包同名 之后再加载mapper接口里的sql-->
         <!--  <mapper class="com.adt.dao.IOrderMapper"></mapper> 注解开发用这个 引用mapper接口 文件 加载sql语句-->
         <!--引入接口的包 xml开发时 从而加载其对应的xml文件 :必须是同包同名    注解开发时 引入接口的包 加载sql-->
        <!-- <package name="com.adt.dao"></package>-->
