@@ -3,9 +3,10 @@ package com.adt.dao;
 import com.adt.pojo.Order;
 import com.adt.pojo.User;
 import org.apache.ibatis.annotations.*;
+import org.mybatis.caches.redis.RedisCache;
 
 import java.util.List;
-@CacheNamespace//注解开发 开启二级缓存
+@CacheNamespace(implementation = RedisCache.class)//注解开发 开启二级缓存 PerpetualCache默认的二级缓存实现
 public interface IOrderMapper {
 
     @Results({
@@ -42,7 +43,7 @@ public interface IOrderMapper {
     //删除用户
     @Delete("delete from user where id=#{aas}")
     void deleteUser(Integer id);
-
+    @Options(useCache =true,flushCache= Options.FlushCachePolicy.DEFAULT)//两个属性默认都是true
     @Select("select * from user where id=#{id}")
     User selectUserById(Integer id);
 
