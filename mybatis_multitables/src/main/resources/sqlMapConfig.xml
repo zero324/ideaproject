@@ -6,6 +6,9 @@
 
     <!--加载properties配置文件-->
     <properties resource="jdbc.properties"></properties>
+    <settings>
+        <setting name="cacheEnabled" value="true"/><!--开启二级缓存  mybatis 一级缓存是默认开启的-->
+    </settings>
     <!--给实体类的全限定类名 起一个别名-->
     <typeAliases>
         <!--给单独的实体起别名-->

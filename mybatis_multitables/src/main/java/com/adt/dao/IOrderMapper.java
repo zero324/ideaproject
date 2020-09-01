@@ -5,7 +5,7 @@ import com.adt.pojo.User;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
-
+@CacheNamespace//注解开发 开启二级缓存
 public interface IOrderMapper {
 
     @Results({

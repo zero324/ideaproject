@@ -35,4 +35,6 @@
     <select id="findUserAndOrder" resultMap="userResultMap" >
         SELECT u.username,u.password,u.birthday,o.* FROM user u LEFT JOIN orders o ON u.id=o.uid
     </select>
+    <!--开启二级缓存-->
+    <cache></cache>
 </mapper>
