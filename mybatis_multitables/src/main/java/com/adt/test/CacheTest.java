@@ -51,7 +51,6 @@ public class CacheTest {
         user.setUsername("修改");
         mapper3.updateUser(user);
         sqlSession3.commit();  //增加 删除  修改 commit之后 清空二级缓存
-
         User user2 = mapper2.selectUserById(1);
         System.out.println(user1==user2);//false  二级缓存 保存的是数据new Object  user必须实现序列化接口
     }
