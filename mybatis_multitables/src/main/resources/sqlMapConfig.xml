@@ -9,6 +9,7 @@
     <settings>
         <setting name="cacheEnabled" value="true"/><!--开启二级缓存  mybatis 一级缓存是默认开启的-->
     </settings>
+
     <!--给实体类的全限定类名 起一个别名-->
     <typeAliases>
         <!--给单独的实体起别名-->
@@ -16,6 +17,13 @@
         <!--批量起别名:该包下所有类的本身类名 :不区分大小写-->
         <package name="com.adt.pojo"/>
     </typeAliases>
+    <!--插件配置: 加载插件-->
+    <plugins>
+        <plugin interceptor="com.adt.plugin.MyPlugin">
+            <property name="name" value="tom"></property><!--配置参数-->
+        </plugin>
+    </plugins>
+
     <!--environments 运行环境 可以配置多个运行环境-->
     <environments default="development">
         <environment id="development">
