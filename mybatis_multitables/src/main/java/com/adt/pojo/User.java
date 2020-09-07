@@ -1,14 +1,19 @@
 package com.adt.pojo;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
-
+@Table(name="user")// 通用mapper 配置
 public class User implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)//数据支持的主键生产策略    oracle用序列
     private Integer id;
+    //如果属性与表中字段不一样的 用@Column
     private String username;
     private String password;
     private String birthday;
     //用户关联的订单
+    @Transient //忽略
     private List<Order> orderList;
 
     public Integer getId() {
@@ -60,7 +65,6 @@ public class User implements Serializable {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", birthday='" + birthday + '\'' +
-                ", orderList=" + orderList +
                 '}';
     }
 }

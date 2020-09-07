@@ -1,14 +1,18 @@
 package com.adt.test;
 
 import com.adt.dao.IOrderMapper;
+import com.adt.dao.UserMapper;
 import com.adt.pojo.Order;
 import com.adt.pojo.User;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Before;
 import org.junit.Test;
+import tk.mybatis.mapper.entity.Example;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -96,4 +100,38 @@ public class TestMybatis {
             System.out.println(user);
         }
     }
+    @Test
+    public void TestPageHelper() throws IOException {
+        PageHelper.startPage(1,1);
+        List<User> users = mapper.selectUsers();
+        for (User user : users) {
+            System.out.println(user);
+        }
+        PageInfo<User> userPageInfo = new PageInfo<>(users);
+        System.out.println("当前页"+userPageInfo.getPageNum());
+        System.out.println("总页数"+userPageInfo.getPages());
+        System.out.println("一页多少条"+userPageInfo.getPageSize());
+        System.out.println("数据总数"+userPageInfo.getTotal());
+    }
+
+    @Test
+    public void TestMapper() throws IOException {
+        InputStream resourceAsStream = Resources.getResourceAsStream("sqlMapConfig.xml");
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(resourceAsStream);
+        SqlSession sqlSession = sqlSessionFactory.openSession(true);
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        User user = new User();
+        user.setId(1);
+        User user1 = mapper.selectOne(user);
+        System.out.println(user1);
+
+        //example方法
+        Example example = new Example(User.class);
+        example.createCriteria().andEqualTo("id",2);
+        List<User> users = mapper.selectByExample(example);
+        for (User user2 : users) {
+            System.out.println(user2);
+        }
+    }
+
 }

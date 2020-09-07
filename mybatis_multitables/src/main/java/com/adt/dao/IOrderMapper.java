@@ -3,10 +3,11 @@ package com.adt.dao;
 import com.adt.pojo.Order;
 import com.adt.pojo.User;
 import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.cache.impl.PerpetualCache;
 import org.mybatis.caches.redis.RedisCache;
 
 import java.util.List;
-@CacheNamespace(implementation = RedisCache.class)//注解开发 开启二级缓存 PerpetualCache默认的二级缓存实现
+@CacheNamespace(implementation = PerpetualCache.class)//注解开发 开启二级缓存 PerpetualCache默认的二级缓存实现  implementation = RedisCache.class
 public interface IOrderMapper {
 
     @Results({
