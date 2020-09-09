@@ -19,12 +19,12 @@
     </resultMap>
 
     <resultMap id="userResultMap" type="com.adt.pojo.User">
-        <result property="id" column="uid"></result>
+        <id property="id" column="uid"></id>
         <result property="username" column="username"></result>
         <result property="password" column="password"></result>
         <result property="birthday" column="birthday"></result>
         <collection property="orderList" ofType="com.adt.pojo.Order">
-            <result property="id" column="id"></result>
+            <id property="id" column="id" ></id>
             <result property="ordertime" column="ordertime"></result>
             <result property="total" column="total"></result>
         </collection>
