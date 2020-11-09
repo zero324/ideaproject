@@ -5,7 +5,9 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -56,6 +58,22 @@ public class DemoController {
     public String handler13(HashMap<String,Object> map) {
         Date date = new Date();
         System.out.println("HashMap==============="+map.getClass());
+        map.put("data", date);
+        return "success";
+    }
+    @RequestMapping("handler14")
+    public String handler14(HashMap<String,Object> map,Date birthday) {
+        Date date = new Date();
+        System.out.println("HashMap==============="+map.getClass());
+        map.put("data", date);
+        return "success";
+    }
+
+    @RequestMapping("handler15")
+    public String handler15(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+        Date date = new Date();
+        ModelMap map = new ModelMap();
+        System.out.println("HashMap===============" + map.getClass());
         map.put("data", date);
         return "success";
     }
