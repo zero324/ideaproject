@@ -16,10 +16,10 @@
         <property name="prefix"  value="/WEB-INF/jsp/"></property>
         <property name="suffix" value=".jsp"></property>
     </bean>
-    <!--开启mvc注解驱动 自动注册最合适的处理器映射器  处理器适配器-->
+    <!--开启mvc注解驱动 自动注册最合适的处理器映射器  处理器适配器(调用handler)-->
     <!--不开启有默认的 处理器映射器 处理器适配器-->
     <mvc:annotation-driven conversion-service="conversionService" />
-    <!--注册⾃定义类型转换器   必须与mvc:annotation-driven连用-->
+    <!--注册⾃定义类型转换器   必须与mvc:annotation-driven连用 进行关联,处理器适配器(调用handler)-->
     <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
         <property name="converters">
             <set>
