@@ -16,8 +16,13 @@
   <servlet-mapping>
     <servlet-name>dispatcherServlet</servlet-name>
     <!--
-    方式一 *.action  等等
-    方式二  /   不拦截 .jsp
+    方式一 *.action  等等 这种方式比较精确  以前和现在有很大的使用比例
+    方式二  /   不拦截 .jsp   但是会拦截.html 等静态资源(静态资源 是除了servlet 和jsp之外的 html css  js png 等等)
+    解决方法
+    为什么配置/ 会拦截 静态资源  以为tomcat容器也有一个web.xml(父) 项目中也有一个web.xml  是继承关系
+    父web.xml 中有一个DefaultDervlet 的url-pattern 是一个/  此时我们自己的项目中也配置了 /,复写web.xml的配置
+    为什么不拦截.jsp呢 以为父web.xml 中有一个JspServlet 拦截.jsp文件  我们自己的web.xml中并没有复写这个配置 所以不会拦截.jsp
+    把jsp的处理交给了tomcat
     方式三  /*    拦截所有路径 包括.jsp
     -->
     <url-pattern>/</url-pattern>
