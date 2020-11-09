@@ -69,6 +69,12 @@ public class DemoController {
         return "success";
     }
 
+    /**
+     * 默认⽀持 Servlet API 作为⽅法参数
+     * 当需要使⽤HttpServletRequest、HttpServletResponse、HttpSession等原⽣servlet对象时，直
+     * 接在handler⽅法中形参声明使⽤即可
+     *
+     */
     @RequestMapping("handler15")
     public String handler15(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
         Date date = new Date();
