@@ -41,5 +41,6 @@
     location : 指定静态资源存放的位置
     / 是webapp根目录  classpath 是resources 根目录
     -->
+    <!--可以配置多个静态资源-->
     <mvc:resources location="/,classpath:/" mapping="/resources/**"  />
 </beans>
