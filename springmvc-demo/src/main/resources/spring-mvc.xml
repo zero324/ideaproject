@@ -42,4 +42,24 @@
     / 是webapp根目录  classpath 是resources 根目录
     -->
     <mvc:resources location="/,classpath:/" mapping="/resources/**"  />
+    <!--配置拦截器-->
+    <mvc:interceptors>
+        <!--默认拦截所有的请求-->
+        <!--<bean  class="com.edu.intercept.MyIntercept1"></bean>-->
+
+        <mvc:interceptor>
+            <!--/是根目录  **是子目录及其子目录-->
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/**"/><!--先有mapping 才有exclude-mapping-->
+            <bean  class="com.edu.intercept.MyIntercept1"></bean>
+
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <!--/是根目录  **是子目录及其子目录-->
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/**"/><!--先有mapping 才有exclude-mapping-->
+            <bean  class="com.edu.intercept.MyIntercept2"></bean>
+
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>
