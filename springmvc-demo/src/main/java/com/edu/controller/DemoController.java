@@ -9,8 +9,12 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/demo")
@@ -86,11 +90,22 @@ public class DemoController {
     }
 
     @RequestMapping("upload")
-    public void upload(MultipartFile uploadName) {
+    public void upload(MultipartFile uploadName,HttpSession session) throws IOException {
        //处理上传文件
         //重命名
         String originalFilename = uploadName.getOriginalFilename();
         //拓展名jpg
         String ext = originalFilename.substring(originalFilename.lastIndexOf(".")+1);
+        String newName= UUID.randomUUID().toString()+"."+ext;
+
+        //存储 要存储到指定的文件夹 /upload 考虑文件过多情况 (一个文件夹存储文件的数量是有限的) 创建子目录
+        String realPath = session.getServletContext().getRealPath("/upload");
+        String datePath = new SimpleDateFormat("yyyyy-MM-dd").format(new Date());
+        File folder = new File(realPath + "/" + datePath);
+        if (!folder.exists()){
+            folder.mkdir();
+        }
+        uploadName.transferTo(new File(folder,newName));
+        //TODU 将磁盘文件路径更新到数据库
     }
 }
