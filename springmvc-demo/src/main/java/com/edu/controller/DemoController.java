@@ -143,7 +143,7 @@ public class DemoController {
         //redirectAttributes.addAttribute() 这种与get请求是一样的
         //可以使用flash属性
         //addFlashAttribute 设置了一个flash属性 ,该属性会被暂存到session中,在跳转之页面后会销毁
-        redirectAttributes.addFlashAttribute("name",redirectAttributes);
+        redirectAttributes.addFlashAttribute("name",name);
         return "redirect:handler01";
     }
 }
