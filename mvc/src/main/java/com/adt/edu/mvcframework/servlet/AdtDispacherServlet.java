@@ -5,6 +5,7 @@ import com.adt.edu.mvcframework.annotations.AdtController;
 import com.adt.edu.mvcframework.annotations.AdtRequestMapping;
 import com.adt.edu.mvcframework.annotations.AdtService;
 import com.adt.edu.mvcframework.pojo.Handler;
+import org.apache.commons.lang.StringUtils;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -16,6 +17,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.*;
@@ -263,6 +265,44 @@ public class AdtDispacherServlet extends HttpServlet {
             resp.getWriter().write("404 not found");
             return;
         }
+        // 参数绑定
+        // 获取所有参数类型数组，这个数组的⻓度就是我们最后要传⼊的args数组的⻓度
+        Class<?>[] parameterTypes = handler.getMethod().getParameterTypes();
+
+        // 根据上述数组⻓度创建⼀个新的数组（参数数组，是要传⼊反射调⽤的）
+        Object[] paraValues = new Object[parameterTypes.length];
+        // 以下就是为了向参数数组中塞值，⽽且还得保证参数的顺序和⽅法中形参顺序⼀致
+        Map<String, String[]> parameterMap = req.getParameterMap();
+        // 遍历request中所有参数 （填充除了request，response之外的参数）
+        for (Map.Entry<String, String[]> param:parameterMap.entrySet()) {
+            // name=1&name=2 name [1,2]
+            String value = StringUtils.join(param.getValue(), ","); // 如同 1,2
+            // 如果参数和⽅法中的参数匹配上了，填充数据
+            if(!handler.getParamIndexMapping().containsKey(param.getKey())) {
+                continue;
+            }
+            // ⽅法形参确实有该参数，找到它的索引位置，对应的把参数值放⼊paraValues
+            Integer index = handler.getParamIndexMapping().get(param.getKey());//name在第 2 个位置
+            paraValues[index] = value; // 把前台传递过来的参数值填充到对应的位置去
+        }
+
+        int requestIndex =
+                handler.getParamIndexMapping().get(HttpServletRequest.class.getSimpleName(
+                )); // 0
+        paraValues[requestIndex] = req;
+        int responseIndex =
+                handler.getParamIndexMapping().get(HttpServletResponse.class.getSimpleName
+                        ()); // 1
+        paraValues[responseIndex] = resp;
+        // 最终调⽤handler的method属性
+        try {
+            handler.getMethod().invoke(handler.getController(),paraValues);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
     }
     private Handler getHandler(HttpServletRequest req) {
         if(handlerMapping.isEmpty()){return null;}
