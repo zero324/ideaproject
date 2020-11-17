@@ -12,6 +12,7 @@
     <title>Title</title>
 </head>
 <body>
-    跳转成功! 服务器时间:  ${ data}
+         <%System.out.println("跳转到页面");%>
+         跳转成功! 服务器时间:  ${ data}
 </body>
 </html>

@@ -40,7 +40,7 @@ public class DemoController {
 
     @RequestMapping("handler01")
     public ModelAndView handler(@ModelAttribute("name") String name) {
-        int i = 1 / 0;
+       // int i = 1 / 0;
         Date date = new Date();
         ModelAndView modelAndView = new ModelAndView();
         //设置数据模型model 相当于 request.setAttribute()
