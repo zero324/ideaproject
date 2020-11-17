@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 public class DemoController {
     @AdtAutoWired
     private IDemoService demoService;
-
+    @AdtRequestMapping("/query")
     public  String query(HttpServletRequest request, HttpServletResponse response, String name){
         return demoService.get(name);
     }

@@ -12,10 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sound.midi.ControllerEventListener;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -26,7 +23,7 @@ import java.util.regex.Pattern;
 
 public class AdtDispacherServlet extends HttpServlet {
 
-    private Properties properties;
+    private Properties properties = new Properties();
 
     //缓存扫描到的全限定类名
     private List<String> classNames = new ArrayList<>();
@@ -208,15 +205,15 @@ public class AdtDispacherServlet extends HttpServlet {
     private void doScan(String scanPackage) {
         //  Thread.currentThread().getContextClassLoader().getResource("").getPath() 得到的路径是classpath的路径
         //scanPackagePath 磁盘上的路径
-        String scanPackagePath = Thread.currentThread().getContextClassLoader().getResource("").getPath() + scanPackage.replaceAll("//.", "/");
+        String scanPackagePath = Thread.currentThread().getContextClassLoader().getResource("").getPath() + scanPackage.replaceAll("\\.", "/");
         File pack = new File(scanPackagePath);
         File[] files = pack.listFiles();
         for (File file : files) {
             if (file.isDirectory()) {
                 //递归
-                doScan(scanPackagePath + "." + file.getName());//com.adt.demo.controller
+                doScan(scanPackage + "." + file.getName());//com.adt.demo.controller
             } else if (file.getName().endsWith(".class")) {
-                String className = scanPackagePath + "." + file.getName().replaceAll(".class", "");
+                String className = scanPackage + "." + file.getName().replaceAll(".class", "");
                 classNames.add(className);
             }
 
@@ -228,12 +225,13 @@ public class AdtDispacherServlet extends HttpServlet {
 
     //加载配置文件
     private void doLoadCofig(String contextConfigLocation) {
-        InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream(contextConfigLocation);
+       InputStream resourceAsStream = AdtDispacherServlet.class.getClassLoader().getResourceAsStream(contextConfigLocation);
         try {
             properties.load(resourceAsStream);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
+        // properties.setProperty("scanPackage","com.adt.demo");
     }
 
     // ⾸字⺟⼩写⽅法
