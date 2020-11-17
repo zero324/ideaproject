@@ -225,7 +225,7 @@ public class AdtDispacherServlet extends HttpServlet {
 
     //加载配置文件
     private void doLoadCofig(String contextConfigLocation) {
-       InputStream resourceAsStream = AdtDispacherServlet.class.getClassLoader().getResourceAsStream(contextConfigLocation);
+       InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream(contextConfigLocation);
         try {
             properties.load(resourceAsStream);
         } catch (Exception e) {
