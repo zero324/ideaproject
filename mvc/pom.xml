@@ -36,6 +36,7 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                    <!--告诉编译器 ,编译时记录形参真是名称-->
                     <compilerArgs>
                         <arg>-parameters</arg>
                     </compilerArgs>
