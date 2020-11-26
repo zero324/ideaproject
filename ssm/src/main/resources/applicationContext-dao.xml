@@ -4,16 +4,36 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-       http://www.springframework.org/schema/context http://www.springframework.org/schema/beans/spring-context.xsd">
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!--包扫描-->
-    <context:component-scan base-package="com.edu"/>
+    <context:component-scan base-package="com.edu.mapper"/>
 
     <!--数据连接池以及事务管理都交给spring容器完成-->
     <!--引入外部资源文件-->
     <context:property-placeholder location="classpath:jdbc.properties"/>
     <!--第三方jar中bean在xml中定义-->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
-
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
     </bean>
+    <!--sqlSessionFactory 在spring 作为单例对象管理-->
+    <!--原来mabatis 中sqlSessionFactory构建是需要素材的:sqlMapConfig.xml内容-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--别名扫描-->
+        <property name="typeAliasesPackage" value="com.edu.pojo"/>
+        <!--数据源dataSource-->
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!--mybatis mapper的代理对象交给spring管理 我们直接从spring容器中获取-->
+    <!--扫描mapper接口生成代理对象,生成的代理对象会储存在ioc容器中-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--mapper接口包路径配置-->
+        <property name="basePackage" value="com.edu.mapper"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+
 </beans>
