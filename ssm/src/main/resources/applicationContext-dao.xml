@@ -6,8 +6,8 @@
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <!--包扫描-->
-    <context:component-scan base-package="com.edu.mapper"/>
+    <!--包扫描  如果mapper 里有spring注解 那么扫描-->
+   <!-- <context:component-scan base-package="com.edu.mapper"/>-->
 
     <!--数据连接池以及事务管理都交给spring容器完成-->
     <!--引入外部资源文件-->

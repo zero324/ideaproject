@@ -10,8 +10,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath*:application*.xml"})
+@RunWith(SpringJUnit4ClassRunner.class)//选择运行器
+@ContextConfiguration(locations = {"classpath*:application*.xml"})//指定容器配置
 public class MybatisSpringTest {
     // 希望测试ioc容器中的哪个对象 注入即可
      @Autowired
