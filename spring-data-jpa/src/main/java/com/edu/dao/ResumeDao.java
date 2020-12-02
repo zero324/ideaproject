@@ -33,5 +33,5 @@ public interface ResumeDao extends BaseDao<Resume,Long> {
      *              -属性名(首字母大写)
      *                -查询方式(模糊,等价) 如果不加查询方式默认是等价
      */
-    List<Resume> findByNameLike(String name);
+    List<Resume> findByNameLikeAndAddress(String name,String address);
 }
