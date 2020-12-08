@@ -9,6 +9,6 @@ public class DemoController {
 
     @RequestMapping("hello")
     public String helloWord(){
-        return "你好 Hello World  热部署";
+        return "Hello World ! 热部署";
     }
 }

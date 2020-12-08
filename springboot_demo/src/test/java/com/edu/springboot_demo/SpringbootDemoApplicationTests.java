@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)  //测试启动类   并加载测试注解
-@SpringBootTest(classes = SpringbootDemoApplication.class)
+@SpringBootTest//(classes = SpringbootDemoApplication.class)
         //标记springboot 单元测试类 并加载applicationContext 上下文环境
 class SpringbootDemoApplicationTests {
     @Autowired
