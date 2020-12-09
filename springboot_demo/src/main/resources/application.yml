@@ -1,0 +1,13 @@
+person:
+  id: 1
+  name: tom
+  family:
+    mother,
+    father
+  hobby: 吃饭,睡觉
+  map:
+    k1: v1
+    k2: v2
+  pet:
+    type: dog
+    name: 小白
