@@ -56,6 +56,8 @@
                 <configuration>
                     <fork>true</fork><!--热部署必须添加这个配置-->
                     <addResources>true</addResources>
+                    <!--增加jvm参数-->
+                    <jvmArguments>-Dfile.encoding=UTF-8</jvmArguments>
                 </configuration>
             </plugin>
         </plugins>
