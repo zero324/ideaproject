@@ -37,7 +37,8 @@ public class ProxyFactory {
      */
     public Object getJdkProxy(Object obj) {
 
-        // 获取代理对象
+        // 获取代理对象  如果是getInterface直接传入一个接口那么生成的代理对象的类型是接口类型
+        // 如果是obj.getInterface 那么代理对象是实体类的类型
         return  Proxy.newProxyInstance(obj.getClass().getClassLoader(), obj.getClass().getInterfaces(),
                 new InvocationHandler() {
                     @Override
