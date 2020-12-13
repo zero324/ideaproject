@@ -79,6 +79,6 @@
     <!--<tx:annotation-driven />    -->
     <tx:annotation-driven />
     <!--6 配置spring包扫描-->
-    <context:component-scan base-package="com.edu" />
+   <!-- <context:component-scan base-package="com.edu" />-->
 
 </beans>

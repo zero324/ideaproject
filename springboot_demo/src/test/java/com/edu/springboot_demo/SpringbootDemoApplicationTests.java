@@ -4,6 +4,7 @@ import com.edu.controller.DemoController;
 import com.edu.SpringbootDemoApplication;
 import com.edu.pojo.MyProperties;
 import com.edu.pojo.Person;
+import com.edu.pojo.SimpleBean;
 import com.edu.pojo.Student;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -13,7 +14,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)  //测试启动类   并加载测试注解
+
+@RunWith(SpringRunner.class) //测试启动类   并加载测试注解
 @SpringBootTest
 //(classes = SpringbootDemoApplication.class)
         //标记springboot 单元测试类 并加载applicationContext 上下文环境
@@ -38,10 +40,20 @@ class SpringbootDemoApplicationTests {
         System.out.println(applicationContext.containsBean("myService"));
     }
 
+
+
     @Test
     public void placeholderTest() {
         System.out.println(description);
     }
 
+    //测试starter
+    @Autowired
+    private SimpleBean simpleBean;
+
+    @Test
+    public void testStarter(){
+        System.out.println(simpleBean);
+    }
 
 }
