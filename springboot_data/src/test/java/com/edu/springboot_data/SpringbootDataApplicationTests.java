@@ -9,7 +9,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -21,6 +23,8 @@ class SpringbootDataApplicationTests {
     private ArticleMapper articleMapper;
     @Autowired
     private CommentDao commentDao;
+    @Autowired
+    private ApplicationContext context;
 
     @Test
     void contextLoads() {
@@ -34,9 +38,18 @@ class SpringbootDataApplicationTests {
     }
 
     @Test
+    @Transactional
     void testDataJpa() {
         Comment one = commentDao.getOne(1);
         System.out.println(one);
+    }
+
+    @Test
+    public void testXXXX(){
+
+        Object dataSource = context.getBean("dataSource");
+        System.out.println(dataSource);
+
     }
 
 }
