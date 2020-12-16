@@ -6,7 +6,7 @@ import org.springframework.data.redis.core.index.Indexed;
 
 @RedisHash("persons")  //指定操作实体类对象person在Redis数据库中的存储空间
 public class Person {
-    @Id        // 标识实体类主键
+    @Id        // 标识实体类主键 字符串形式的hashkey标识唯一实体对象id
     private String id;
 
     @Indexed //标识对应属性,在redis数据库中生成二级索引
