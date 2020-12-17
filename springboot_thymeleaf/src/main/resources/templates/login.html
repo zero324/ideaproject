@@ -27,5 +27,13 @@
     <a class="btn btn-sm" th:href="@{/toLoginPage(l='en_US')}">English</a>
 
 </form>
+<script  type="text/javascript">
+    function log() {
+        var login='[[${#request.getContextPath()}]]';
+       alert(login+"重启")
+    };
+    log();
+</script>
 </body>
+
 </html>
