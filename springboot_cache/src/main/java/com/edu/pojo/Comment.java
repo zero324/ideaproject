@@ -1,9 +1,10 @@
 package com.edu.pojo;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity(name = "t_comment")//设置orm实体类,并指明表名
-public class Comment {
+public class Comment implements Serializable {
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
