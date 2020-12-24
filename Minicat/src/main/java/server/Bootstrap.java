@@ -50,17 +50,17 @@ public class Bootstrap {
             Socket socket = serverSocket.accept();
             InputStream inputStream = socket.getInputStream();
             //从输入流获取请求信息
-            int count = 0;
+           /* int count = 0;
             while (count == 0) {
                 count = inputStream.available();
             }
             byte[] bytes = new byte[count];
-            inputStream.read(bytes);
-            System.out.println("请求信息=====>" + new String(bytes));
+            inputStream.read(bytes);  //之后输入流请求信息为空
+            System.out.println("请求信息=====>" + new String(bytes));*/
             // 封装Request对象和Response对象
-        /*    Request request = new Request(inputStream);
+            Request request = new Request(inputStream);
             Response response = new Response(socket.getOutputStream());
-            response.outputHtml(request.getUrl());*/
+            response.outputHtml(request.getUrl());
             socket.close();
         }
     }
