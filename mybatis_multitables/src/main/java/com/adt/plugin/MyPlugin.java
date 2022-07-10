@@ -30,7 +30,7 @@ public class MyPlugin implements Interceptor {
     @Override
     public Object plugin(Object target) {
         Object wrap = Plugin.wrap(target, this);
-        System.out.println("主要是把当前的拦截器生成代理对象存到拦截器链中");
+        System.out.println("主要是把当前的拦截对象生成代理对象");
         return wrap;
     }
 
