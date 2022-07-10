@@ -29,13 +29,9 @@ public class MyPlugin implements Interceptor {
      */
     @Override
     public Object plugin(Object target) {
-        if(target instanceof StatementHandler){
-            Object wrap = Plugin.wrap(target, this);
-            System.out.println("主要是把当前的拦截对象生成代理对象");
-            return wrap;
-        }else{
-            return target;
-        }
+        Object wrap = Plugin.wrap(target, this);
+        System.out.println("主要是把当前的拦截对象生成代理对象");
+        return wrap;
     }
 
     /**
